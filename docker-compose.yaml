@@ -1,0 +1,15 @@
+# version: '3.8'
+
+services:
+  ai-model:
+    build: .
+    container_name: ai-container
+    volumes:
+      - ./models:/models
+      - ./config.json:/app/config.json
+    ports:
+      - "5000:5000"
+    environment:
+      - MODEL_NAME=${MODEL_NAME}
+      - MODEL_VERSION=${MODEL_VERSION}
+    command: ["/app/scripts/run_model.sh"]
